@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> student result</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+
+    <form action="/add" method="post">
+      <input type="hidden" name="uId" value="<%= uId %>">
+      name<input type="text" name="name" value="<%= inVal.name %>">
+      sub1<input type="number" name="sub1" value="<%= inVal.sub1 %>" >
+      sub2<input type="number" name="sub2" value="<%= inVal.sub2 %>" >
+      sub3<input type="number" name="sub3" value="<%= inVal.sub3 %>" >
+      sub4<input type="number" name="sub4" value="<%= inVal.sub4 %>" >
+      <button>Submit</button>
+      <br>
+      <br>
+      <br>
+      <br>
+
+      <table border="1px" align="center"  cellspacing="10px" cellpadding="20px">
+        
+        <thead>
+          <tr> 
+              <th >Name</th>
+              <th>Sub1</th>
+              <th>Sub2</th>
+              <th>Sub3</th>
+              <th>Sub4</th>
+              <th>Total</th>
+              <th>per</th>
+              <th>pass/fail</th>
+              <th>delete</th>
+              <th>edit</th>
+      </tr>
+      </thead>
+      
+      <tbody>
+        <tr>
+          <% for(i = 0; i< rows.length; i++) { %>
+            <td>
+              <%= rows[i].name %>
+            </td>
+            
+            <td><%= rows[i].sub1 %></h1>
+            <td><%= rows[i].sub2 %></td>
+            <td><%= rows[i].sub3 %></td>
+            <td><%= rows[i].sub4 %></td>
+            
+            <%total=rows[i].sub1+rows[i].sub2+rows[i].sub3+rows[i].sub4%>
+            <td><%= total%></td>
+
+            <%per=total/4%>
+            <td>
+                <%= per%>
+            </td>
+            <%if (per <= 100 && per >= 80) {%>
+                <td>A</td>
+            <%} else if (per <= 79 && per >= 68) {%>
+                <td>b</td>
+            <%} else if (per <= 68 && per >= 40) {%>
+                <td>c</td>
+             <% } else {%>
+                <td>f</td>   
+              <%}%>
+
+              
+          <td>
+            <a href="/?did=<%=rows[i]._id%>">delete</a>
+          </td>
+
+          <td>
+            <a href="/?eid=<%=rows[i]._id%>">edit</a>
+
+          </td>
+
+
+        </tr>
+        <%}%>
+      </tbody>
+
+</table>
+
+    </form>
+
+  </body>
+</html>
